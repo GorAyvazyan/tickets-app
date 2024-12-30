@@ -3,6 +3,7 @@ import React from "react";
 import Filters from "@/components/FIlters";
 import { Button } from "@/components/ui/button.tsx";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useTicketContext } from "@/context/TicketContext.tsx";
 
 type FiltersCardProps = {
     filters: number[];
@@ -10,18 +11,29 @@ type FiltersCardProps = {
 };
 
 const FiltersCard: React.FC<FiltersCardProps> = ({ filters, onFilterChange }) => {
+    const { fetchRate, currency } = useTicketContext();
+
+    const handleCurrencyChange = (newCurrency: string) => {
+        if (currency !== newCurrency) {
+            fetchRate(newCurrency);
+        }
+    };
     return (
         <Card className="self-start shadow-lg w-full">
             <CardHeader className="p-4">
                 <CardTitle className="text-xs text-slate-600 uppercase mb-2 font-semibold">Валюта</CardTitle>
                 <div className="flex items-center border rounded">
-                    <Button className="bg-sky-600 hover:bg-sky-600 w-full rounded text-white font-medium">RUB</Button>
-                    <Button className="bg-transparent w-full rounded-none text-sky-500 hover:bg-sky-100 selected:text-white font-medium border-r hover:border-r-blue-300">
-                        USD
-                    </Button>
-                    <Button className="bg-transparent w-full rounded-none text-sky-500 hover:bg-sky-100 selected:text-white font-medium">
-                        EUR
-                    </Button>
+                    {["RUB", "USD", "EUR"].map((curr) => (
+                        <Button
+                            key={curr}
+                            className={`w-full rounded text-sky-500 bg-transparent font-medium ${
+                                currency === curr ? "bg-sky-600 text-white" : "hover:bg-sky-100"
+                            }`}
+                            onClick={() => handleCurrencyChange(curr)}
+                        >
+                            {curr}
+                        </Button>
+                    ))}
                 </div>
             </CardHeader>
             <CardContent className="px-0 pb-4 pt-2">

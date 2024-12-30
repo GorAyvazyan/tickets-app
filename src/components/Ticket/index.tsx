@@ -23,6 +23,7 @@ const Ticket: React.FC<TicketData> = ({
     stops,
     price,
 }) => {
+    const { currencySymbol } = useTicketContext();
     return (
         <div className="ticket">
             <Card className="shadow-lg border-0">
@@ -33,7 +34,7 @@ const Ticket: React.FC<TicketData> = ({
                             onClick={buyTicket}
                             className="bg-orange-500  hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded text-center"
                         >
-                            {`Купить за ${formatPrice(price)} ₽`}
+                            {`Купить за ${formatPrice(price.toFixed(0))} ${currencySymbol}`}
                         </Button>
                     </div>
                     <div className="flex-1 w-full grid grid-cols-1 sm:grid-cols-3 gap-4 lg:px-4 ">
