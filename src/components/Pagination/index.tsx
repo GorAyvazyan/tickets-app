@@ -25,7 +25,7 @@ const PaginationComponent: React.FC<PaginationProps> = ({ currentPage, totalPage
     }
 
     return (
-        <Pagination className="mt-8 w-full flex justify-center">
+        <Pagination className="my-8 w-full flex justify-center">
             <PaginationContent className="gap-2 flex flex-wrap justify-center">
                 <PaginationItem>
                     <PaginationPrevious
