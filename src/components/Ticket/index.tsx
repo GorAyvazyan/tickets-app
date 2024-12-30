@@ -4,27 +4,9 @@ import Airlines from "@/assets/images/airlines.png";
 import PlaneSvg from "@/assets/images/plane.svg";
 import { Button } from "@/components/ui/button.tsx";
 import { Card, CardContent } from "@/components/ui/card.tsx";
+import { useTicketContext } from "@/context/TicketContext.tsx";
+import { formatDate, formatPrice } from "@/helpers";
 import { TicketData } from "@/types";
-import { format, parse } from "date-fns";
-import { ru } from "date-fns/locale";
-
-const formatPrice = (price: number) => {
-    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-};
-
-const formatDate = (date: string) => {
-    try {
-        const parsedDate = parse(date, "dd.MM.yy", new Date());
-        return format(parsedDate, "dd MMMM yyyy, EEE", { locale: ru });
-    } catch (err: unknown) {
-        if (err instanceof Error) {
-            console.error("Invalid date format:", err.message);
-        } else {
-            console.error("An unexpected error occurred while parsing the date");
-        }
-        return "Invalid Date";
-    }
-};
 
 const buyTicket = () => alert("Билет был успешно куплен");
 
@@ -49,7 +31,7 @@ const Ticket: React.FC<TicketData> = ({
                         <img src={Airlines} alt={`${carrier} logo`} width={100} height={100} className="mb-4" />
                         <Button
                             onClick={buyTicket}
-                            className="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded text-center"
+                            className="bg-orange-500  hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded text-center"
                         >
                             {`Купить за ${formatPrice(price)} ₽`}
                         </Button>

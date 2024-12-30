@@ -15,3 +15,13 @@ export type TicketData = {
 export type TicketsListData = {
     tickets: TicketData[];
 };
+
+export type TicketContextProps = {
+    tickets: TicketData[];
+    setTickets: (tickets: TicketData[]) => void;
+    currency: string;
+    rate: number;
+    currencySymbol: string;
+    setCurrency: (currency: string) => void;
+    fetchRate: (currency: string) => Promise<void>;
+};
