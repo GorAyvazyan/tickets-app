@@ -3,6 +3,7 @@ import React from "react";
 import Filters from "@/components/FIlters";
 import { Button } from "@/components/ui/button.tsx";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { CurrenciesName } from "@/constants";
 import { useTicketContext } from "@/context/TicketContext.tsx";
 
 type FiltersCardProps = {
@@ -23,7 +24,7 @@ const FiltersCard: React.FC<FiltersCardProps> = ({ filters, onFilterChange }) =>
             <CardHeader className="p-4">
                 <CardTitle className="text-xs text-slate-600 uppercase mb-2 font-semibold">Валюта</CardTitle>
                 <div className="flex items-center border rounded">
-                    {["RUB", "USD", "EUR"].map((curr) => (
+                    {Object.values(CurrenciesName).map((curr) => (
                         <Button
                             key={curr}
                             className={`w-full rounded text-sky-500 bg-transparent font-medium ${
